@@ -50,7 +50,7 @@ Describe "Get Member" {
 
         <# EXAMPLE
 
-        $Cmdlet1 = 'Get-Process'
+        Cmdlet1 = 'Get-Process'
         $PropertyName = 'Threads'
         $Reason = $BecauseString -f $PropertyName, $cmdlet1
         & (Get-Command -Name $Cmdlet1) |
@@ -60,24 +60,24 @@ Describe "Get Member" {
         #>
         $BecauseString = "property '{0}' should be present in output from {1}"
 
-        $Cmdlet1 = '____'
-        $PropertyName = '____'
+        $Cmdlet1 = 'Get-Process'
+        $PropertyName = 'ProcessName'
 
         $Reason = $BecauseString -f $PropertyName, $cmdlet1
         & (Get-Command -Name $Cmdlet1) |
             Get-Member -MemberType Property -Name $PropertyName |
             Should -Not -BeNullOrEmpty -Because $Reason
 
-        $Cmdlet2 = '____'
-        $PropertyName = '____'
+        $Cmdlet2 = 'Get-Service'
+        $PropertyName = 'Site'
 
         $Reason = $BecauseString -f $PropertyName, $cmdlet2
         & (Get-Command -Name $Cmdlet2) |
             Get-Member -MemberType Property -Name $PropertyName |
             Should -Not -BeNullOrEmpty -Because $Reason
 
-        $Cmdlet3 = '____'
-        $PropertyName = '____'
+        $Cmdlet3 = 'Get-ChildItem'
+        $PropertyName = 'Exists'
 
         $Reason = $BecauseString -f $PropertyName, $cmdlet3
         & (Get-Command -Name $Cmdlet3) |
@@ -104,22 +104,22 @@ Describe "Get Member" {
         #>
         $BecauseString = "method '{0}' should be present in output from {1}"
 
-        $Cmdlet1 = '____'
-        $MethodName = '____'
+        $Cmdlet1 = 'Get-Process'
+        $MethodName = 'Refresh'
         $Reason = $BecauseString -f $MethodName, $cmdlet1
         & (Get-Command -Name $Cmdlet1) |
             Get-Member -MemberType Method -Name $MethodName |
             Should -Not -BeNullOrEmpty -Because $Reason
 
-        $Cmdlet2 = '____'
-        $MethodName = '____'
+        $Cmdlet2 = 'Get-ChildItem'
+        $MethodName = 'Delete'
         $Reason = $BecauseString -f $MethodName, $cmdlet2
         & (Get-Command -Name $Cmdlet2) |
             Get-Member -MemberType Method -Name $MethodName |
             Should -Not -BeNullOrEmpty -Because $Reason
 
-        $Cmdlet3 = '____'
-        $MethodName = '____'
+        $Cmdlet3 = 'Get-ACL'
+        $MethodName = 'SetOwner'
         $Reason = $BecauseString -f $MethodName, $cmdlet3
         & (Get-Command -Name $Cmdlet3) |
             Get-Member -MemberType Method -Name $MethodName |
