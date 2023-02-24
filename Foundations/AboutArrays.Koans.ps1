@@ -31,7 +31,7 @@ Describe 'Arrays' {
             [0], the second at [1], etc.
         #>
         $Ages[0] | Should -Be 12
-        __ | Should -Be $Ages[3]
+        64 | Should -Be $Ages[3]
     }
 
     It 'can be created with the @() operator' {
@@ -51,7 +51,7 @@ Describe 'Arrays' {
         )
 
         # Where is index 4 in the above array?
-        __ | Should -Be $Names[4]
+        'Serena' | Should -Be $Names[4]
 
         <#
             Although in many cases in PowerShell, an expression that only
@@ -61,7 +61,7 @@ Describe 'Arrays' {
         #>
         $Array = @( 10 )
 
-        $Array.GetType().FullName | Should -Be System.____
+        $Array.GetType().FullName | Should -Be "System.Object[]"
     }
 
     It 'is a fixed size collection; elements cannot be added or removed' {
@@ -69,8 +69,8 @@ Describe 'Arrays' {
 
         $Ages = 12, 25, 18, 64
 
-        { $Ages.Add(59) } | Should -Throw -ExpectedMessage '____'
-        { $Ages.Remove(12) } | Should -Throw -ExpectedMessage '____'
+        { $Ages.Add(59) } | Should -Throw -ExpectedMessage 'Exception calling "Add" with "1" argument(s): "Collection was of a fixed size."'
+        { $Ages.Remove(12) } | Should -Throw -ExpectedMessage 'Exception calling "Remove" with "1" argument(s): "Collection was of a fixed size."'
     }
 
     It 'can be created using the addition operator' {
@@ -82,7 +82,7 @@ Describe 'Arrays' {
 
         $Ages = 12, 25, 18, 64
 
-        $Age = __
+        $Age = 42
         $Ages = $Ages + $Age
 
         <#
@@ -90,7 +90,7 @@ Describe 'Arrays' {
             assignment combination operator.
         #>
 
-        $Age = __
+        $Age = 59
         $Ages += $Age
 
         $Ages | Should -Be 12, 25, 18, 64, 42, 59
