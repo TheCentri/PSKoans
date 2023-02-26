@@ -82,7 +82,7 @@ Describe 'Variable Assignment' {
             $Constant = 'NewValue'
         }
         $RemoveConstant | Should -Throw -ExpectedMessage 'Cannot overwrite variable Constant because it is read-only or constant.'
-
+        $Constant | Out-Null
         $RemoveReadOnly = {
             # Contrast Read-Only variables, which can be later removed (if you do it right.)
             Set-Variable -Name 'Constant' -Value 25 -Option ReadOnly

@@ -42,17 +42,17 @@ Describe 'String Comparison Operators' {
             $String = 'this is a string.'
             $OtherString = 'This is a string.'
 
-            $____ | Should -Be ($String -eq $OtherString)
+            $true | Should -Be ($String -eq $OtherString)
             # Watch out for case sensitive operators!
-            $____ | Should -Be ($String -ceq $OtherString)
+            $false | Should -Be ($String -ceq $OtherString)
         }
 
         It 'is useful for a straightforward comparison' {
             $String = 'one more string!'
             $OtherString = "ONE MORE STRING!"
 
-            $____ | Should -Be ($String -ne $OtherString)
-            $____ | Should -Be ($String -cne $OtherString)
+            $false | Should -Be ($String -ne $OtherString)
+            $true | Should -Be ($String -cne $OtherString)
         }
     }
 
@@ -62,8 +62,8 @@ Describe 'String Comparison Operators' {
             $String = 'my string'
             $OtherString = 'your string'
 
-            $____ | Should -Be ($String -gt $OtherString)
-            $____ | Should -Be ($String -lt $OtherString)
+            $false | Should -Be ($String -gt $OtherString)
+            $true | Should -Be ($String -lt $OtherString)
         }
     }
 }
@@ -82,10 +82,10 @@ Describe 'String Array Operators' {
             $String = "hello fellows what a lovely day"
             $Split = @(
                 'hello'
-                '____'
+                'fellows'
                 'what'
-                '____'
-                '____'
+                'a'
+                'lovely'
                 'day'
             )
             $Split | Should -Be ($String -split ' ')
@@ -94,23 +94,23 @@ Describe 'String Array Operators' {
         It 'uses regex by default' {
             $String = 'hello.dear'
             # Since -split uses regex, we have to escape certain characters to treat them literally.
-            @('____', '____') | Should -Be ($String -split '\.')
+            @('hello', 'dear') | Should -Be ($String -split '\.')
         }
 
         It 'can limit the number of substrings' {
             $Planets = 'Mercury,Venus,Earth,Mars,Jupiter,Saturn,Uranus,Neptune'
-            @('____', '____', '____', '____') | Should -Be ($Planets -split ',', 4)
+            @('Mercury', 'Venus', 'Earth', 'Mars,Jupiter,Saturn,Uranus,Neptune') | Should -Be ($Planets -split ',', 4)
         }
 
         It 'can use simple matching' {
             $String = 'hello.dear'
             # Using SimpleMatch mode disables regex.
-            @('____', '____') | Should -Be ($String -split '.', 0, 'SimpleMatch')
+            @('hello', 'dear') | Should -Be ($String -split '.', 0, 'SimpleMatch')
         }
 
         It 'can be case sensitive' {
             $String = "applesAareAtotallyAawesome!"
-            @('____', '____', '____', '____') | Should -Be ($String -csplit 'A')
+            @('apples', 'are', 'totally', 'awesome!') | Should -Be ($String -csplit 'A')
         }
     }
 
@@ -126,7 +126,7 @@ Describe 'String Array Operators' {
         #>
         It 'can join an array into a single string' {
             $Array = 'Hi', 'there,', 'what', 'are', 'you', 'doing?'
-            '____' | Should -Be ($Array -join ' ')
+            'Hi there, what are you doing?' | Should -Be ($Array -join ' ')
         }
 
         It 'always produces a string result' {
